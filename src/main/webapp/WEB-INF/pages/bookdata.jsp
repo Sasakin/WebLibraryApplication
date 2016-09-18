@@ -63,7 +63,7 @@
     <td>${book.bookTitle}</td>
     <td>${book.bookAuthor}</td>
     <td>${book.price/100}${book.price%100}</td>
-    <p><img src="/images/1.jpg"
+    <p><img src="/resources/book_img/${book.book_image}"
              width="240" height="232" ></p>
   </tr>
 </table>

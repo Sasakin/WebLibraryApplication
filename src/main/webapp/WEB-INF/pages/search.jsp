@@ -59,6 +59,7 @@
             <th width="120">Price</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
+            <th width="130">Pictures</th>
         </tr>
         <c:forEach items="${listBooks}" var="book">
             <tr>
@@ -68,6 +69,8 @@
                 <td>${book.price/100}${book.price%100}</td>
                 <td><a href="<c:url value='/edit/${book.id}'/>">Edit</a></td>
                 <td><a href="<c:url value='/remove/${book.id}'/>">Delete</a></td>
+                <td> <p><img src="/resources/book_img/${book.book_image}"
+                        width="130" height="122" ></p></td>
             </tr>
         </c:forEach>
     </table>
