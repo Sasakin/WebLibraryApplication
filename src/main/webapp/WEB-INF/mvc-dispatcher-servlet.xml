@@ -50,8 +50,6 @@
         <property name="bookDao" ref="bookDao"/>
     </bean>
 
-    <context:component-scan base-package="com.test.library"/>
-
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
