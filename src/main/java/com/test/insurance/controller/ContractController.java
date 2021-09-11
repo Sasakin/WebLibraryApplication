@@ -1,6 +1,5 @@
 package com.test.insurance.controller;
 
-import com.test.insurance.model.Book;
 import com.test.insurance.model.Contract;
 import com.test.insurance.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 @Controller
-public class BookController {
+public class ContractController {
     private ContractService contractService;
     private HttpServletRequest request;
     @Autowired(required = true)
@@ -75,11 +73,11 @@ public class BookController {
         return "contracts";
     }
 
-    @RequestMapping("bookdata/{id}")
+    @RequestMapping("contractdata/{id}")
     public String bookData(@PathVariable("id") int id, Model model){
-        model.addAttribute("book", this.contractService.getContractById(id));
+        model.addAttribute("contract", this.contractService.getContractById(id));
 
-        return "bookdata";
+        return "contractdata";
     }
 
 /*    @RequestMapping(value = "search/", method = RequestMethod.POST)

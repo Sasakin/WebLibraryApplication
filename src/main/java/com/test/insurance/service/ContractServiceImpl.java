@@ -38,16 +38,12 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    @Transactional
     public Contract getContractById(int id) {
         return this.contractDao.getContractById(id);
     }
 
     @Override
-   // @Transactional
     public List<Contract> listContracts() {
-        System.out.println("dao status");
-        System.out.println(this.contractDao==null);
         return this.contractDao.listContracts();
     }
 

@@ -1,11 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
-<%@ page session="false" %>
+<%@ include file="taglibs.jsp" %>
+
 <html>
 <head>
-    <title>Books Page</title>
+    <title>Contracts Page</title>
 
 
     <style type="text/css">
@@ -53,15 +50,15 @@
 
 <br/>
 <br/>
-<h1>Book List</h1>
+<h1>Contract List</h1>
 
 <c:url var="addContract" value="addcontract/" />
-        <tr>
-            <td colspan="2">
-                <form:form action="${addContract}">
-                    <input type="submit" value="Create contract"> </form:form>
-            </td>
-        </tr>
+<c:url var="contractDetails" value="contractdata/" />
+<tr>
+    <td colspan="5">
+        <form:form action="${addContract}">
+            <input type="submit" value="Create contract"> </form:form></td>
+</tr>
 
 <c:if test="${!empty listContracts}">
     <table class="tg">
@@ -76,6 +73,7 @@
                 <%--<td><a href="/bookdata/${book.id}" target="_blank">${book.bookTitle}</a></td>--%>
                 <td>${contract.number}</td>
                 <td>${contract.date}</td>
+                <td><a href="<c:url value='/contractdata/${contract.id}'/>">Open contract</a></td>
                 <td><a href="<c:url value='/edit/${contract.id}'/>">Edit</a></td>
                 <td><a href="<c:url value='/remove/${contract.id}'/>">Delete</a></td>
             </tr>

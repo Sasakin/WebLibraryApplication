@@ -1,12 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+<%@ include file="taglibs.jsp" %>
 
 <html>
 <head>
-  <title>BookData</title>
+  <title>Contract Data</title>
 
   <style type="text/css">
     .tg {
@@ -49,24 +45,23 @@
 
 </head>
 <body>
-<h1>Book Details</h1>
+<h1>Contract Details</h1>
 
 <table class="tg">
   <tr>
     <th width="80">ID</th>
     <th width="120">Title</th>
     <th width="120">Author</th>
-    <th width="120">Price</th>
+   <%-- <th width="120">Price</th>--%>
   </tr>
   <tr>
-    <td>${book.id}</td>
-    <td>${book.bookTitle}</td>
-    <td>${book.bookAuthor}</td>
-    <td>${book.price/100}${book.price%100}</td>
-    <p><img src="/resources/book_img/${book.book_image}"
-             width="240" height="232" ></p>
+    <td>${contract.id}</td>
+    <td>${contract.number}</td>
+    <td>${contract.date}</td>
+    <%--<td>${book.price/100}${book.price%100}</td>--%>
+    <%--<p><img src="/resources/book_img/${book.book_image}"
+             width="240" height="232" ></p>--%>
   </tr>
 </table>
 </body>
 </html>
-  <%//${book.book_image}%>

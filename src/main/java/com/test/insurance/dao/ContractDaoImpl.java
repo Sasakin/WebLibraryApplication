@@ -52,12 +52,8 @@ public class ContractDaoImpl implements ContractDao {
 
     @Override
     public Contract getContractById(int id) {
-      /*  Session session =this.sessionFactory.getCurrentSession();
-        Book book = (Book) session.load(Book.class, new Integer(id));
-        logger.info("Book successfully loaded. Book details: " + book);
-
-        return book;*/
-        return null;
+        Contract contract = entityManager.unwrap(Session.class).load(Contract.class, new Integer(id));
+        return contract;
     }
 
     @PersistenceContext
@@ -67,16 +63,8 @@ public class ContractDaoImpl implements ContractDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<Contract> listContracts() {
-        Criteria criteria = entityManager.unwrap(Session.class).createCriteria(Contract.class);
-        return criteria.list();
-        /*Session session = this.sessionFactory.getCurrentSession();
-        List<Contract> contractList = session.createQuery("from Contract").list();
-
-        for(Contract contract: contractList){
-            logger.info("Contract list: " + contract);
-        }
-
-        return contractList;*/
+        List<Contract> list = entityManager.unwrap(Session.class).createQuery("from Contract").getResultList();
+        return list;
     }
 
    /* @Override
