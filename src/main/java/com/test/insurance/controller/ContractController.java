@@ -1,5 +1,6 @@
 package com.test.insurance.controller;
 
+import com.test.insurance.calculator.InsuranceCalculator;
 import com.test.insurance.model.Contract;
 import com.test.insurance.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,19 @@ import java.util.List;
 @Controller
 public class ContractController {
     private ContractService contractService;
+    private InsuranceCalculator calculator;
+
     private HttpServletRequest request;
+
     @Autowired(required = true)
     @Qualifier(value = "contractService")
     public void setContractService(ContractService contractService) {
         this.contractService = contractService;
+    }
+
+    @Autowired(required = true)
+    public void setCalculator(InsuranceCalculator calculator) {
+        this.calculator = calculator;
     }
 
     @RequestMapping(value = "/")
