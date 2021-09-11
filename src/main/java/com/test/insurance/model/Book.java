@@ -1,4 +1,4 @@
-package com.test.library.model;
+package com.test.insurance.model;
 
 
 
@@ -6,6 +6,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "book")
 public class Book {
+
+    public Book() {
+    }
+
+    public Book(int id, String bookTitle, String bookAuthor, int price, String book_image) {
+        this.id = id;
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.price = price;
+        this.book_image = book_image;
+    }
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
