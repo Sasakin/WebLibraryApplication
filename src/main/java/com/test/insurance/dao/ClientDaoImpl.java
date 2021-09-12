@@ -3,6 +3,7 @@ package com.test.insurance.dao;
 import com.test.insurance.model.Client;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,17 +16,20 @@ public class ClientDaoImpl implements ClientDao {
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public void addClient(Client client) {
         entityManager.unwrap(Session.class).persist(client);
     }
 
     @Override
+    @Transactional
     public void updateClient(Client client) {
         entityManager.unwrap(Session.class).update(client);
 
     }
 
     @Override
+    @Transactional
     public void removeClient(int id) {
         Client client = (Client) entityManager.unwrap(Session.class).load(Client.class, new Integer(id));
 

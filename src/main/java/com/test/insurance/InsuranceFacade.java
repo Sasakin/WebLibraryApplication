@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class InsuranceFacade {
@@ -34,7 +35,7 @@ public class InsuranceFacade {
     @Qualifier(value = "realtyAddressService")
     private RealtyAddressService realtyAddressService;
 
-    public void calcPremiumAndSave(Insurance insurance) {
+    public Insurance calcPremiumAndSave(Insurance insurance) {
         RealtyType realtyType = RealtyType.getTypeByTitle(insurance.getRealtyType());
         int buildYear = Integer.valueOf(insurance.getBuildYear());
         int square = Integer.valueOf(insurance.getSquare());
@@ -45,15 +46,30 @@ public class InsuranceFacade {
 
         insuranceService.addInsurance(insurance);
 
-        Contract contract = new Contract();
-        contract.setDate(new Date());
-        contract.setInsurance(insurance);
+        return insurance;
+    }
 
+    public void addContract(Contract contract, Insurance insurance,  Client client, RealtyAddress address) {
+        contract.setInsurance(insurance);
+        contract.setClient(client);
+        contract.setAddress(address);
         contractService.addContract(contract);
+    }
+
+    public Contract getContractById(int id) {
+        return contractService.getContractById(id);
     }
 
     public void addClient(Client client) {
         clientService.addClient(client);
+    }
+
+    public List<Client> getClientList() {
+        return clientService.listClients();
+    }
+
+    public void updateClient(Client client) {
+        clientService.updateClient(client);
     }
 
 

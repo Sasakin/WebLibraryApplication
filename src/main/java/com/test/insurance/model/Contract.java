@@ -26,6 +26,14 @@ public class Contract {
     @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
+    @OneToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private RealtyAddress address;
+
     public int getId() {
         return id;
     }
@@ -54,12 +62,35 @@ public class Contract {
         this.insurance = insurance;
     }
 
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public RealtyAddress getAddress() {
+        return address;
+    }
+
+    public void setAddress(RealtyAddress address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Contract{" +
                 "id=" + id +
                 ", number=" + number +
                 ", date=" + date +
+                ", insurance=" + insurance +
+                ", client=" + client +
+                ", address=" + address +
                 '}';
     }
 }

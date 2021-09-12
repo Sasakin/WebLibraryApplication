@@ -19,7 +19,9 @@ CREATE TABLE contract (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             number INT AUTO_INCREMENT NOT NULL,
                             date date NOT NULL,
-                            insurance_id INT NOT NULL);
+                            insurance_id INT NOT NULL,
+                            client_id INT NOT NULL,
+                            address_id INT NOT NULL);
 
 CREATE TABLE client (
                           id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,5 +39,8 @@ CREATE TABLE realty_address (
 INSERT INTO INSURANCE (insured_sum, start_date, end_date,
                        reality_type, build_year, square)
                        VALUES (20, sysdate(), sysdate(), 'дом', 2015, 30);
+
+INSERT INTO CLIENT (first_name, last_name, second_name, birth_date, pasport_number, pasport_series)
+VALUES ('fr','fr','fr', sysdate(), 12313, 2015);
 
 INSERT INTO CONTRACT (date, insurance_id) VALUES (sysdate(), 1);
