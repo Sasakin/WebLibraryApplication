@@ -1,10 +1,8 @@
 package com.test.insurance.controller;
 
-import com.test.insurance.calculator.InsuranceCalculator;
+import com.test.insurance.InsuranceFacade;
 import com.test.insurance.model.Contract;
-import com.test.insurance.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +17,11 @@ import java.util.List;
 
 @Controller
 public class ContractController {
-    private ContractService contractService;
+    @Autowired
+    private InsuranceController insuranceController;
 
-    @Autowired(required = true)
-    @Qualifier(value = "contractService")
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
-    }
+    @Autowired
+    private InsuranceFacade insuranceFacade;
 
     @RequestMapping(value = "/")
     public String showHome() {
@@ -33,8 +29,8 @@ public class ContractController {
     }
 
     @RequestMapping(value = "contracts", method = RequestMethod.GET)
-    public String listBooks(Model model){
-        List<Contract> list = contractService.listContracts();
+    public String listContracts(Model model){
+        List<Contract> list = insuranceFacade.getContractList();
         model.addAttribute("contract", new Contract());
         model.addAttribute("listContracts", list);
 
@@ -42,58 +38,38 @@ public class ContractController {
     }
 
     @RequestMapping(value = "addcontract/", method = RequestMethod.POST)
-    public String addBook(Model model){
+    public String addContractPage(Model model){
         model.addAttribute("contract", new Contract());
-        return "addcontract"; //"redirect:/books";
+        return "addcontract";
     }
 
     @RequestMapping(value = "addcontract/add/", method = RequestMethod.POST)
     public String addContract(@ModelAttribute("contract") Contract contract){
-        /*if(book.getId() == 0){
-            this.bookService.addBook(book);
-        }else {
-            this.bookService.updateBook(book);
-        }*/
-        System.out.println(contract);
-
-        return "index"; //"redirect:/books";
+        insuranceController.createContract(contract);
+        return "index";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeBook(@PathVariable("id") int id){
-        this.contractService.removeContract(id);
+    public String removeContract(@PathVariable("id") int id){
+        insuranceFacade.removeContractById(id);
 
         return "contracts";
     }
 
     @RequestMapping("edit/{id}")
-    public String editBook(@PathVariable("id") int id, Model model){
-        model.addAttribute("book", this.contractService.getContractById(id));
-        model.addAttribute("listBooks", this.contractService.listContracts());
+    public String editContract(@PathVariable("id") int id, Model model){
+        model.addAttribute("book", insuranceFacade.getContractById(id));
+        model.addAttribute("listBooks", insuranceFacade.getContractList());
 
         return "contracts";
     }
 
     @RequestMapping("contractdata/{id}")
-    public String bookData(@PathVariable("id") int id, Model model){
-        model.addAttribute("contract", this.contractService.getContractById(id));
+    public String contractData(@PathVariable("id") int id, Model model){
+        model.addAttribute("contract", insuranceFacade.getContractById(id));
 
         return "contractdata";
     }
-
-/*    @RequestMapping(value = "search/", method = RequestMethod.POST)
-    public String searchBookByAuthor(Model model){
-       // bookAuthor = request.getParameter("bookAuthor");
-       // model.addAttribute ("book", new Book());
-        *//*for(int i=0;i<2;i++)
-            System.out.println(book +"В классе Controller");*//*
-        List<Book> list = new ArrayList<Book>();
-        Book book = new Book(1, "1", "1",1,"1");
-        list.add(book);
-        model.addAttribute("listBooks", list);
-
-        return "search";
-    }*/
 
 
     @InitBinder

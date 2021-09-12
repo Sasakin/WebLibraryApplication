@@ -16,7 +16,8 @@ public class InsuranceController {
     @Autowired
     private InsuranceFacade facade;
 
-    public void createContract() {
+    //test
+    public void createContract(Contract contract) {
         Insurance insurance = new Insurance();
         insurance.setInsuredSum(1000);
         insurance.setStartDate(new Date());
@@ -42,13 +43,16 @@ public class InsuranceController {
         address.setAddress("Saint Petersburg");
         facade.addRealtyAddress(address);
 
-        Contract contract = new Contract();
-        contract.setDate(new Date());
-
         facade.addContract(contract, insurance, client, address);
 
-        System.out.println("contract details:" + contract); //+ facade.getContractById(contract.getId()));
+        System.out.println("contract details:" + contract);
+    }
 
+    //test
+    public void createContract() {
+        Contract contract = new Contract();
+        contract.setDate(new Date());
+        createContract(contract);
     }
 
 }

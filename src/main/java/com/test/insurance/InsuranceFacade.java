@@ -56,6 +56,14 @@ public class InsuranceFacade {
         contractService.addContract(contract);
     }
 
+    public List<Contract> getContractList() {
+        return contractService.listContracts();
+    }
+
+    public void removeContractById(int id) {
+        contractService.removeContract(id);
+    }
+
     public Contract getContractById(int id) {
         return contractService.getContractById(id);
     }
