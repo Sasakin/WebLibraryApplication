@@ -1,12 +1,10 @@
 package com.test.insurance.dao;
 
 import com.test.insurance.model.Contract;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,7 +16,7 @@ import java.util.List;
 public class ContractDaoImpl implements ContractDao {
     private static final Logger logger = LoggerFactory.getLogger(ContractDaoImpl.class);
 
-    @Autowired
+    @PersistenceContext
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -34,20 +32,20 @@ public class ContractDaoImpl implements ContractDao {
 
     @Override
     public void updateContract(Contract contract) {
-        //Session session = this.sessionFactory.getCurrentSession();
-      //  session.update(book);
-        logger.info("Book successfully update. Book details: " + contract);
+        Session session = this.sessionFactory.getCurrentSession();
+        session.update(contract);
+        logger.info("Contract successfully update. Contract details: " + contract);
     }
 
     @Override
     public void removeContract(int id) {
-        //Session session = this.sessionFactory.getCurrentSession();
-       // Book book = (Book) session.load(Book.class, new Integer(id));
+        Session session = this.sessionFactory.getCurrentSession();
+        Contract contract = (Contract) session.load(Contract.class, new Integer(id));
 
-        //if(book!=null){
-       //     session.delete(book);
-       // }
-       // logger.info("Book successfully removed. Book details: " + book);
+        if(contract!=null){
+            session.delete(contract);
+        }
+        logger.info("Contract successfully removed. Contract details: " + contract);
     }
 
     @Override
@@ -66,15 +64,5 @@ public class ContractDaoImpl implements ContractDao {
         List<Contract> list = entityManager.unwrap(Session.class).createQuery("from Contract").getResultList();
         return list;
     }
-
-   /* @Override
-    public List<Book> searchContractByAuthor(String bookAuthor) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT book FROM Book book  WHERE book.bookAuthor =:bookAuthor" );
-        query.setParameter("bookAuthor", bookAuthor );
-        List<Book> bookList = (List<Book>) query.list();
-        return bookList;
-        return new ArrayList<Book>();
-    }*/
 
 }

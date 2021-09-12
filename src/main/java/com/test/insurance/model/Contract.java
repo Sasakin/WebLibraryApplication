@@ -16,10 +16,14 @@ public class Contract {
     private int id;
 
     @Column(name = "NUMBER")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
 
     @Column(name = "DATE")
     private Date date;
+
+    @OneToOne(mappedBy = "INSURANCE_ID")
+    private Insurance insurance;
 
     public int getId() {
         return id;
@@ -43,6 +47,10 @@ public class Contract {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
     }
 
     @Override

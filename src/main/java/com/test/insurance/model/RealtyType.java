@@ -16,8 +16,8 @@ public enum RealtyType {
         this.typeTitle = typeTitle;
     }
 
-    public RealtyType getTypeByTitle(String typeTitle) {
-        RealtyType type = Arrays.stream(values()).filter(p -> getTypeTitle().equals(typeTitle)).findAny().get();
+    public static RealtyType getTypeByTitle(String rTypeTitle) {
+        RealtyType type = Arrays.stream(values()).filter(rt -> rt.getTypeTitle().equals(rTypeTitle)).findAny().get();
         return type;
     }
 
