@@ -20,19 +20,11 @@ import java.util.List;
 @Controller
 public class ContractController {
     private ContractService contractService;
-    private InsuranceCalculator calculator;
-
-    private HttpServletRequest request;
 
     @Autowired(required = true)
     @Qualifier(value = "contractService")
     public void setContractService(ContractService contractService) {
         this.contractService = contractService;
-    }
-
-    @Autowired(required = true)
-    public void setCalculator(InsuranceCalculator calculator) {
-        this.calculator = calculator;
     }
 
     @RequestMapping(value = "/")

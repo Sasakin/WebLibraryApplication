@@ -10,11 +10,16 @@ import java.util.Date;
 /**
  * Класс для расчета страховой премии.
  */
-@Component
+@Component("insuranceCalculator")
 public class InsuranceCalculator {
 
-    @Autowired
+
     private InsuranceCoeffAdapter insuranceCoeffAdapter;
+
+    @Autowired
+    public void setInsuranceCoeffAdapter(InsuranceCoeffAdapter insuranceCoeffAdapter) {
+        this.insuranceCoeffAdapter = insuranceCoeffAdapter;
+    }
 
     /**
      * Рассчет страховой премии.

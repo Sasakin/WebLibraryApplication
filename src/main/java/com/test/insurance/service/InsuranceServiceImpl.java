@@ -4,7 +4,6 @@ import com.test.insurance.dao.InsuranceDao;
 import com.test.insurance.model.Insurance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,30 +13,34 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Autowired
     @Qualifier("insuranceDao")
-    private InsuranceDao dao;
+    private InsuranceDao insuranceDao;
+
+    public void setInsuranceDao(InsuranceDao insuranceDao) {
+        this.insuranceDao = insuranceDao;
+    }
 
     @Override
     public void addInsurance(Insurance insurance) {
-        dao.addInsurance(insurance);
+        insuranceDao.addInsurance(insurance);
     }
 
     @Override
     public void updateInsurance(Insurance insurance) {
-        dao.updateInsurance(insurance);
+        insuranceDao.updateInsurance(insurance);
     }
 
     @Override
     public void removeInsurance(int id) {
-        dao.removeInsurance(id);
+        insuranceDao.removeInsurance(id);
     }
 
     @Override
     public Insurance getInsuranceById(int id) {
-        return dao.getInsuranceById(id);
+        return insuranceDao.getInsuranceById(id);
     }
 
     @Override
     public List<Insurance> listInsurances() {
-        return dao.listInsurances();
+        return insuranceDao.listInsurances();
     }
 }

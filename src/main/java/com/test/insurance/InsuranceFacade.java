@@ -15,18 +15,30 @@ import java.util.Date;
 @Component
 public class InsuranceFacade {
 
-    @Autowired
     private InsuranceCalculator calculator;
+
+    private InsuranceService insuranceService;
+
+    private ContractService contractService;
+
+    @Autowired(required = true)
+    public void setCalculator(InsuranceCalculator calculator) {
+        this.calculator = calculator;
+    }
 
     @Autowired(required = true)
     @Qualifier("insuranceService")
-    private InsuranceService insuranceService;
+    public void setInsuranceService(InsuranceService insuranceService) {
+        this.insuranceService = insuranceService;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "contractService")
-    private ContractService contractService;
+    public void setContractService(ContractService contractService) {
+        this.contractService = contractService;
+    }
 
-    private void CalcPremiumAndSave(Insurance insurance) {
+    public void calcPremiumAndSave(Insurance insurance) {
         RealtyType realtyType = RealtyType.getTypeByTitle(insurance.getRealtyType());
         int buildYear = Integer.valueOf(insurance.getBuildYear());
         int square = Integer.valueOf(insurance.getSquare());

@@ -22,7 +22,8 @@ public class Contract {
     @Column(name = "DATE")
     private Date date;
 
-    @OneToOne(mappedBy = "INSURANCE_ID")
+    @OneToOne
+    @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
     public int getId() {
