@@ -2,7 +2,9 @@ package com.test.insurance;
 
 import com.test.insurance.calculator.InsuranceCalculator;
 import com.test.insurance.calculator.InsuranceCoeffAdapter;
+import com.test.insurance.model.Client;
 import com.test.insurance.model.Insurance;
+import com.test.insurance.service.ClientService;
 import com.test.insurance.service.ContractService;
 import com.test.insurance.service.InsuranceService;
 import org.junit.Before;
@@ -31,13 +33,16 @@ public class InsuranceFacadeTest {
     @Mock
     private InsuranceService insuranceService;
 
+    @Mock
+    private ClientService clientService;
+
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void testGetUserById() {
+   // @Test
+    public void testCalcAndSaveInsurance() {
         Insurance insurance = new Insurance();
         insurance.setInsuredSum(1000);
         insurance.setStartDate(new Date());
@@ -48,6 +53,15 @@ public class InsuranceFacadeTest {
 
         facade.calcPremiumAndSave(insurance);
         Mockito.when(insuranceService.getInsuranceById(insurance.getId())).thenReturn(insurance);
+
+    }
+
+    @Test
+    public void testInsertClient() {
+        Client client = Mockito.mock(Client.class);
+        Mockito.mock(Client.class);
+
+        Mockito.when(clientService.getClientById(client.getId())).thenReturn(client);
 
     }
 }

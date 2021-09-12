@@ -30,6 +30,10 @@ CREATE TABLE client (
                           pasport_series INT NOT NULL,
                           pasport_number INT NOT NULL);
 
+CREATE TABLE realty_address (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        address varchar(200) NOT NULL);
+
 INSERT INTO INSURANCE (insured_sum, start_date, end_date,
                        reality_type, build_year, square)
                        VALUES (20, sysdate(), sysdate(), 'дом', 2015, 30);

@@ -1,13 +1,11 @@
 package com.test.insurance;
 
 import com.test.insurance.calculator.InsuranceCalculator;
-import com.test.insurance.model.Client;
-import com.test.insurance.model.Contract;
-import com.test.insurance.model.Insurance;
-import com.test.insurance.model.RealtyType;
+import com.test.insurance.model.*;
 import com.test.insurance.service.ClientService;
 import com.test.insurance.service.ContractService;
 import com.test.insurance.service.InsuranceService;
+import com.test.insurance.service.RealtyAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -32,6 +30,10 @@ public class InsuranceFacade {
     @Qualifier(value = "clientService")
     private ClientService clientService;
 
+    @Autowired
+    @Qualifier(value = "realtyAddressService")
+    private RealtyAddressService realtyAddressService;
+
     public void calcPremiumAndSave(Insurance insurance) {
         RealtyType realtyType = RealtyType.getTypeByTitle(insurance.getRealtyType());
         int buildYear = Integer.valueOf(insurance.getBuildYear());
@@ -52,5 +54,10 @@ public class InsuranceFacade {
 
     public void addClient(Client client) {
         clientService.addClient(client);
+    }
+
+
+    public void addRealtyAddress(RealtyAddress address) {
+        realtyAddressService.addRealtyAddress(address);
     }
 }

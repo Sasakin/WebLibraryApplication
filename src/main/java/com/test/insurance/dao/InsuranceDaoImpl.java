@@ -30,7 +30,7 @@ public class InsuranceDaoImpl implements InsuranceDao {
     @Override
     @Transactional
     public void updateInsurance(Insurance insurance) {
-        entityManager.unwrap(Session.class).update(insurance);
+        entityManager.unwrap(Session.class).persist(insurance);
         logger.info("Insurance successfully update. Insurance details: " + insurance);
     }
 
