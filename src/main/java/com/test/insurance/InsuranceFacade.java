@@ -1,9 +1,11 @@
 package com.test.insurance;
 
 import com.test.insurance.calculator.InsuranceCalculator;
+import com.test.insurance.model.Client;
 import com.test.insurance.model.Contract;
 import com.test.insurance.model.Insurance;
 import com.test.insurance.model.RealtyType;
+import com.test.insurance.service.ClientService;
 import com.test.insurance.service.ContractService;
 import com.test.insurance.service.InsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +17,20 @@ import java.util.Date;
 @Component
 public class InsuranceFacade {
 
+    @Autowired
     private InsuranceCalculator calculator;
 
+    @Autowired
+    @Qualifier("insuranceService")
     private InsuranceService insuranceService;
 
+    @Autowired
+    @Qualifier(value = "contractService")
     private ContractService contractService;
 
-    @Autowired(required = true)
-    public void setCalculator(InsuranceCalculator calculator) {
-        this.calculator = calculator;
-    }
-
-    @Autowired(required = true)
-    @Qualifier("insuranceService")
-    public void setInsuranceService(InsuranceService insuranceService) {
-        this.insuranceService = insuranceService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "contractService")
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
-    }
+    @Autowired
+    @Qualifier(value = "clientService")
+    private ClientService clientService;
 
     public void calcPremiumAndSave(Insurance insurance) {
         RealtyType realtyType = RealtyType.getTypeByTitle(insurance.getRealtyType());
@@ -54,5 +48,9 @@ public class InsuranceFacade {
         contract.setInsurance(insurance);
 
         contractService.addContract(contract);
+    }
+
+    public void addClient(Client client) {
+        clientService.addClient(client);
     }
 }

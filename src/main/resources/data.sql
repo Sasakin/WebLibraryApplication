@@ -21,6 +21,15 @@ CREATE TABLE contract (
                             date date NOT NULL,
                             insurance_id INT NOT NULL);
 
+CREATE TABLE client (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+                          first_name varchar(20) NOT NULL,
+                          second_name varchar(20) NOT NULL,
+                          last_name varchar(20) NOT NULL,
+                          birth_date date NOT NULL,
+                          pasport_series INT NOT NULL,
+                          pasport_number INT NOT NULL);
+
 INSERT INTO INSURANCE (insured_sum, start_date, end_date,
                        reality_type, build_year, square)
                        VALUES (20, sysdate(), sysdate(), 'дом', 2015, 30);
